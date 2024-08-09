@@ -2,20 +2,21 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Book } from '../model/Book';
 import RootStackParamList from '../model/RootStackParamList';
 
 
 
 type BookDetailScreenRouteProp = RouteProp<RootStackParamList, 'BookDetail'>;
-type BookDetailScreenNavigationProp = StackNavigationProp<RootStackParamList, 'BookDetail'>;
+type BookDetailScreenNavigationProp = StackNavigationProp<RootStackParamList, 'TestScreen'>;
 
 type Props = {
   route: BookDetailScreenRouteProp;
   navigation: BookDetailScreenNavigationProp;
 };
 
-const BookDetailScreen: React.FC<Props> = ({ route }) => {
+
+
+const BookDetailScreen: React.FC<Props> = ({ route ,navigation}) => {
   const { book } = route.params;
 
   return (
@@ -28,6 +29,15 @@ const BookDetailScreen: React.FC<Props> = ({ route }) => {
       <Text style={styles.bookTitle}>{book.title}</Text>
       <Text>{book.author}</Text>
       <Text>{book.description}</Text>
+      <View style={{ height: 20 }} />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>{
+          navigation.navigate('TestScreen',{test:"test"})
+        } } >
+        <Text style={styles.buttonText}>Call API</Text>
+      </TouchableOpacity>
+    
     </View>
   );
 };
@@ -45,12 +55,21 @@ const styles = StyleSheet.create({
     alignItems: "center"
 
   },
-
+  button: {
+    backgroundColor: '#007BFF',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
   bookCover: {
     width: 150,
     height: 150,
     borderRadius: 4,
     marginRight: 16,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
   },
   bookInfo: {
     flex: 1,

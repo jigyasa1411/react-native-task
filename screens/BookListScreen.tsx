@@ -1,31 +1,38 @@
 import * as React from 'react';
-import { FlatList, TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { Book } from '../model/Book';
-import { useBookViewModel } from '../viewmodel/BookViewModel';
+import {
+  FlatList,
+  TouchableOpacity,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {Book} from '../model/Book';
+import {useBookViewModel} from '../viewmodel/BookViewModel';
 import RootStackParamList from '../model/RootStackParamList';
 
-
-
-
-type BookListScreenNavigationProp = StackNavigationProp<RootStackParamList, 'BookList'>;
+type BookListScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'BookList'
+>;
 
 type Props = {
   navigation: BookListScreenNavigationProp;
 };
 
-const BookListScreen: React.FC<Props> = ({ navigation }) => {
-  const { books } = useBookViewModel();
+const BookListScreen: React.FC<Props> = ({navigation}) => {
+  const {books} = useBookViewModel();
 
-  const renderItem = ({ item }: { item: Book }) => (
+  const renderItem = ({item}: {item: Book}) => (
     <TouchableOpacity
-
       style={styles.bookItem}
-      onPress={() => navigation.navigate('BookDetail', { book: item })}
-    >
+      onPress={() => navigation.navigate('BookDetail', {book: item})}>
       <Image
         style={styles.bookCover}
-        source={{ uri: 'https://static.vecteezy.com/system/resources/thumbnails/019/900/152/small_2x/old-book-watercolor-illustration-png.png' }}
+        source={{
+          uri: 'https://static.vecteezy.com/system/resources/thumbnails/019/900/152/small_2x/old-book-watercolor-illustration-png.png',
+        }}
       />
       <View style={styles.bookInfo}>
         <Text style={styles.bookTitle}>{item.title}</Text>
@@ -57,7 +64,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderRadius: 8,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
